@@ -61,21 +61,42 @@ namespace InterfacialApp
         }
     }
 
+    public interface IPenWriter
+    {
+        void Write(string message);
+    }
+
+    public interface IPencilWriter
+    {
+        void Write(string message);
+    }
+
+    public class Writer :IPenWriter, IPencilWriter
+    {
+        public void Write(string message)
+        {
+            throw new NotImplementedException();
+        }
+       
+    }
+
     internal class Program
     {
+        
         static Ilogger logger {  get; set; }
         static void Main()
         {
            logger = new Logger();
-
             var worker1 = new Worker1(logger);
             var worker2 = new Worker2(logger);
             var worker3 = new Worker3(logger);
-
             worker1.RunWorker();
             worker2.RunWorker();
             worker3.RunWorker();
 
+            Writer writer = new Writer();
+            (IPenWriter(writer)).Write();
+        
             Console.ReadKey();
         }
     }
