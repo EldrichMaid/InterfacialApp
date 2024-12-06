@@ -1,0 +1,51 @@
+﻿using System.Runtime.CompilerServices;
+
+namespace InterfacialApp
+{
+    public interface Ilogger
+    {
+        void Event(string message);
+        void Error(string message);
+    }
+
+    public class Logger : Ilogger
+    {
+        public void Error(string message)
+        {
+           Console.WriteLine(message); 
+        }
+
+        public void Event(string message)
+        {
+            //отправка в бд
+            //отправка на почту
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.WriteLine(message);
+        }
+    }
+
+    public interface IWorker
+    {
+        void RunWorker();
+    }
+
+    internal class Program
+    {
+        static Ilogger logger {  get; set; }
+        static void Main()
+        {
+           logger = new Logger();
+
+            var worker1 = new Worker1(logger);
+            var worker2 = new Worker2(logger);
+            var worker3 = new Worker3(logger);
+
+            worker1.RunWorker();
+            worker2.RunWorker();
+            worker3.RunWorker();
+
+            Console.ReadKey();
+        }
+    }
+}
