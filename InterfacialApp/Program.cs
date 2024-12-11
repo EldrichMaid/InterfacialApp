@@ -104,6 +104,9 @@ namespace InterfacialApp
             Writer writer = new Writer();
             ((IWriter)writer).Write();
 
+            Builder builder = new Builder();
+            ((IBuilder)builder).Build();
+
             Console.ReadKey();
         }
     }
