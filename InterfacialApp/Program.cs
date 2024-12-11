@@ -156,6 +156,35 @@ namespace InterfacialApp
         }
     }
 
+    public interface IBook
+    {
+        void Read();
+    }
+
+    public interface IDevice
+    {
+        void TurnOn();
+        void TurnOff();
+    }
+
+    public class ElectronicBook : IBook, IDevice
+    {
+        void IBook.Read()
+        {
+            Console.WriteLine("Presenting reading optons.");
+        }
+
+        void IDevice.TurnOff()
+        {
+            Console.WriteLine("Turning device off.");
+        }
+
+        void IDevice.TurnOn()
+        {
+            Console.WriteLine("Turning device on.");
+        }
+    }
+
     internal class Program
     {
         
@@ -190,6 +219,12 @@ namespace InterfacialApp
             fileReader.Read();
             fileWriter.Write();
             fileMailer.SendEmail();
+
+            IDevice Device = new ElectronicBook();
+            IBook Book = new ElectronicBook();
+            Device.TurnOn();
+            Book.Read();
+            Device.TurnOff();
 
             Console.ReadKey();
         }
