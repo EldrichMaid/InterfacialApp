@@ -61,21 +61,16 @@ namespace InterfacialApp
         }
     }
 
-    public interface IPenWriter
+    public interface IWriter
     {
-        void Write(string message);
-    }
+        void Write();
+    }    
 
-    public interface IPencilWriter
+    public class Writer :IWriter
     {
-        void Write(string message);
-    }
-
-    public class Writer :IPenWriter, IPencilWriter
-    {
-        public void Write(string message)
+        public void Write()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Written."); 
         }
        
     }
@@ -83,7 +78,7 @@ namespace InterfacialApp
     internal class Program
     {
         
-        static Ilogger logger {  get; set; }
+        static Ilogger logger {  get; set; }        
         static void Main()
         {
            logger = new Logger();
@@ -95,8 +90,8 @@ namespace InterfacialApp
             worker3.RunWorker();
 
             Writer writer = new Writer();
-            (IPenWriter(writer)).Write();
-        
+            ((IWriter)writer).Write();
+
             Console.ReadKey();
         }
     }
