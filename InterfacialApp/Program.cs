@@ -75,6 +75,18 @@ namespace InterfacialApp
        
     }
 
+    public interface IBuilder
+    {
+        void Build();
+    }
+
+    public class Builder: IBuilder
+    {
+        public void Build()
+        {
+            Console.WriteLine("Builder built a building.");
+        }
+    }
     internal class Program
     {
         
