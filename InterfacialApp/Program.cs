@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace InterfacialApp
 {
@@ -122,6 +123,39 @@ namespace InterfacialApp
         }
     }
 
+    public interface IFileWriter
+    {
+        void Write();
+    }
+
+    public interface IReader
+    {
+        void Read();
+    }
+
+    public interface IMailer
+    {
+        void SendEmail();
+    }
+
+    public class FileManager : IFileWriter, IReader, IMailer
+    {
+        public void Read()
+        {
+            Console.WriteLine("File is read.");
+        }
+
+        public void SendEmail()
+        {
+            Console.WriteLine("File is sent via email.");
+        }
+
+        public void Write()
+        {
+            Console.WriteLine("New info is written in the file.");
+        }
+    }
+
     internal class Program
     {
         
@@ -149,7 +183,13 @@ namespace InterfacialApp
             BiFile.OpenBinarryFile();
             BiFile.ReadFile();
             fileInfo.Search("Search line.");
-            
+
+            IReader fileReader = new FileManager();
+            IFileWriter fileWriter = new FileManager();
+            IMailer fileMailer = new FileManager();
+            fileReader.Read();
+            fileWriter.Write();
+            fileMailer.SendEmail();
 
             Console.ReadKey();
         }
