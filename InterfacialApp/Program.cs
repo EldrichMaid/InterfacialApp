@@ -87,6 +87,41 @@ namespace InterfacialApp
             Console.WriteLine("Builder built a building.");
         }
     }
+
+    public interface IFile
+    {
+        void ReadFile();
+    }
+
+    public interface IBinarryFile
+    {
+        void ReadFile();
+        void OpenBinarryFile();
+    }
+
+    public class FileReader : IFile, IBinarryFile
+    {
+        public void OpenBinarryFile()
+        {
+            Console.WriteLine("Binarry file has opened.");
+        }
+
+        void IFile.ReadFile()
+        {
+            Console.WriteLine("Commencing ordinary file reading.");
+        }
+
+        void IBinarryFile.ReadFile()
+        {
+            Console.WriteLine("Commencing binarry file reading.");
+        }
+
+        public void Search(string text)
+        { 
+            Console.WriteLine(text);
+        }
+    }
+
     internal class Program
     {
         
@@ -106,6 +141,15 @@ namespace InterfacialApp
 
             Builder builder = new Builder();
             ((IBuilder)builder).Build();
+
+            IBinarryFile BiFile = new FileReader();
+            IFile OrdFile = new FileReader();
+            FileReader fileInfo = new FileReader();
+            OrdFile.ReadFile();
+            BiFile.OpenBinarryFile();
+            BiFile.ReadFile();
+            fileInfo.Search("Search line.");
+            
 
             Console.ReadKey();
         }
