@@ -185,6 +185,29 @@ namespace InterfacialApp
         }
     }
 
+    public interface IUpdater<in T>
+    {
+        void Update(T entity);
+    }
+
+    public class User
+    {
+
+    }
+
+    public class Account : User
+    {
+
+    }
+
+    public class UserService : IUpdater<User>
+    {
+        public void Update(User User)
+        {
+            Console.WriteLine("User updated.");
+        }
+    }
+
     internal class Program
     {
         
@@ -225,6 +248,12 @@ namespace InterfacialApp
             Device.TurnOn();
             Book.Read();
             Device.TurnOff();
+
+            var User = new User();
+            var Account = new Account();
+            IUpdater<Account> Updater = new UserService();
+            var UserService = new UserService();
+            UserService.Update(User);
 
             Console.ReadKey();
         }
